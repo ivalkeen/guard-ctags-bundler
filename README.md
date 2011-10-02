@@ -1,9 +1,15 @@
 Guard-CTags-Bundler
-=====
+=
 
 Guard-CTags-Bundler generates [ctags](http://ctags.sourceforge.net) for your project and for gems in your bundle. For project tags file `tags` is generated, for gems tags file `gems.tags` is generated.
 
-When you run `bundle install` in your project, `gems.tags` file is automatically is generated or updated. When you save one of you project files, `tags` file is automatically generated or updated.
+Features
+-
+
+* Initially developed for Rails projects, but theoretically can be used with any ruby project, that uses Bundler, with minimal configuration changes.
+* When you run `bundle install` in your project, `gems.tags` file is automatically is generated or updated.
+* When you save one of you project's ruby files, `tags` file is automatically generated or updated.
+* Only Linux is tested, but probably will work on Mac
 
 ## Install
 
@@ -35,3 +41,5 @@ In ubuntu you can install ctags by running
 Vim supports ctags by default. All you need to do is add your `gems.tags` file to the Vim's tag stack.
 
     set tags+=gems.tags
+
+
