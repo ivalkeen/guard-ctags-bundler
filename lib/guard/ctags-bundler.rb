@@ -1,12 +1,11 @@
 require "guard/ctags-bundler/version"
 require 'guard'
 require 'guard/guard'
-require 'rubygems'
+require 'bundler'
+require 'bundler/runtime'
 
 module Guard
   class CtagsBundler < Guard
-    BUNDLER = "__bundler__"
-
     def initialize(watchers = [], options = {})
       super(watchers, options)
     end
@@ -16,28 +15,27 @@ module Guard
     end
 
     def run_on_change(paths)
-      if paths == [BUNDLER]
+      if paths.include?('Gemfile.lock')
         UI.info "regenerating bundler tags..."
         generate_bundler_tags
-      else 
+      end
+      ruby_files = paths.reject {|f| f == 'Gemfile.lock'}
+      if ruby_files.any?
         UI.info "regenerating project tags..."
-        generate_project_tags(paths)
+        generate_project_tags(ruby_files)
       end
     end
 
     private
 
     def generate_project_tags(paths)
-      Thread.new do
-        system("find #{paths.join(' ')} -type f -name \\*.rb | ctags -f tags -L -")
-      end
+      system("ctags -f tags -L #{paths.join(' ')}")
     end
 
     def generate_bundler_tags
-      Thread.new do
-        paths = `ruby -e "require('bundler'); puts(Bundler.load.specs.map(&:full_gem_path).join(' '))"`
-        system("find #{paths.strip} -type f -name \\*.rb | ctags -f gems.tags -L -")
-      end
+      runtime = Bundler::Runtime.new Dir.pwd, Bundler.definitions(true)
+      paths = runtime.specs.map(&:full_gem_path).join(' ')
+      system("find #{paths.strip} -type f -name \\*.rb | ctags -f gems.tags -L -")
     end
   end
 end
