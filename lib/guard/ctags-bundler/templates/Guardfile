@@ -1,5 +1,4 @@
 guard 'ctags-bundler' do
-  watch(/^(app|lib|spec\/support)\/.*\.rb$/) { ["app", "lib", "spec/support"] }
-  watch(/^Gemfile.lock$/) { ::Guard::CtagsBundler::BUNDLER }
+  watch(%r{^(app|lib|spec/support)/.*\.rb$})
+  watch('Gemfile.lock')
 end
-
