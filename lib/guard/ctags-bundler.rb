@@ -29,11 +29,11 @@ module Guard
     private
 
     def generate_project_tags(paths)
-      system("ctags -f tags -L #{paths.join(' ')}")
+      system("ctags -f tags #{paths.join(' ')}")
     end
 
     def generate_bundler_tags
-      runtime = Bundler::Runtime.new Dir.pwd, Bundler.definitions(true)
+      runtime = Bundler::Runtime.new Dir.pwd, Bundler.definition(true)
       paths = runtime.specs.map(&:full_gem_path).join(' ')
       system("find #{paths.strip} -type f -name \\*.rb | ctags -f gems.tags -L -")
     end
