@@ -33,7 +33,7 @@ module Guard
     end
 
     def generate_bundler_tags
-      runtime = Bundler::Runtime.new Dir.pwd, Bundler.definition
+      runtime = ::Bundler::Runtime.new Dir.pwd, ::Bundler.definition
       paths = runtime.specs.map(&:full_gem_path).join(' ')
       system("find #{paths.strip} -type f -name \\*.rb | ctags -f gems.tags -L -")
     end
