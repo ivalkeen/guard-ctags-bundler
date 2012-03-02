@@ -53,5 +53,3 @@ Ctags can be used with emacs too. Add `:emacs => true` option to your Guardfile 
     end
 
 Thanks to [Jorge Dias](https://github.com/diasjorge) for this patch.
-
-
