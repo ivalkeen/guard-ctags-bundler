@@ -42,6 +42,7 @@ module Guard
       paths = paths.join(' ').strip
       cmd = "find #{paths} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
       cmd << " -e" if options[:emacs]
+      UI.info cmd
       system(cmd)
     end
   end

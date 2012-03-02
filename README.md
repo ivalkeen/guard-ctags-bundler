@@ -43,3 +43,15 @@ Vim supports ctags by default. All you need to do is add your `gems.tags` file t
     set tags+=gems.tags
 
 
+## Emacs
+
+Ctags can be used with emacs too. Add `:emacs => true` option to your Guardfile and ctags will be generated with `-e` option:
+
+    guard 'ctags-bundler', :emacs => true do
+      watch(%r{^(app|lib|spec/support)/.*\.rb$})  { ["app", "lib", "spec/support"] }
+      watch('Gemfile.lock')
+    end
+
+Thanks to [Jorge Dias](https://github.com/diasjorge) for this patch.
+
+
