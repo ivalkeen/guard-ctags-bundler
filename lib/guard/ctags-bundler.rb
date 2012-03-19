@@ -24,6 +24,7 @@ module Guard
         UI.info "regenerating project tags..."
         generate_project_tags(ruby_files)
       end
+      system("cat tags gems.tags > TAGS") if options[:emacs]
     end
 
     private
@@ -43,7 +44,6 @@ module Guard
       cmd = "find #{paths} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
       cmd << " -e" if options[:emacs]
       system(cmd)
-      system("cat tags gems.tags > TAGS") if options[:emacs]
     end
   end
 end
