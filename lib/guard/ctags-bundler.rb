@@ -24,6 +24,7 @@ module Guard
         UI.info "regenerating project tags..."
         generate_project_tags(ruby_files)
       end
+      system("cat tags gems.tags > TAGS") if options[:emacs]
     end
 
     private
