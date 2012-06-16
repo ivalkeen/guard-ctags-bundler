@@ -12,6 +12,7 @@ module Guard
 
     def start
       UI.info 'Guard::CtagsBundler is running!'
+      run_on_change(['Gemfile.lock', '.'])
     end
 
     def run_on_change(paths)
