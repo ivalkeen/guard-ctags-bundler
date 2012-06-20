@@ -3,3 +3,5 @@
 Gemfile.lock
 pkg/*
 /vendor/ruby
+/test/test_project/tags
+/test/test_project/gems.tags

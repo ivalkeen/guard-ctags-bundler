@@ -1,4 +1,4 @@
-Guard-CTags-Bundler
+###### Guard-CTags-Bundler
 =
 
 Guard-CTags-Bundler generates [ctags](http://ctags.sourceforge.net) for your project and for gems in your bundle. For project tags file `tags` is generated, for gems tags file `gems.tags` is generated.
@@ -27,6 +27,23 @@ And then add a basic setup to your `Guardfile`:
 
     $ guard init ctags-bundler
 
+## Usage
+
+Please, read [Guard usage doc](https://github.com/guard/guard#readme)
+
+## Guardfile Options
+
+``` ruby
+:src_path => ".", # source path to be scanned for tags (default .)
+:emacs => false, # run ctags in emacs mode and merge tags and gems.tags into TAGS file
+```
+
+For a typical Rails application, `Guardfile` can look like this (default):
+
+    guard 'ctags-bundler', :src_path => ["app", "lib", "spec/support"] do
+      watch(/^(app|lib|spec\/support)\/.*\.rb$/)
+      watch('Gemfile.lock')
+    end
 
 ## CTags
 
@@ -42,14 +59,13 @@ Vim supports ctags by default. All you need to do is add your `gems.tags` file t
 
     set tags+=gems.tags
 
-
 ## Emacs
 
 Ctags can be used with emacs too. Add `:emacs => true` option to your Guardfile and ctags will be generated with `-e` option:
 
-    guard 'ctags-bundler', :emacs => true do
-      watch(%r{^(app|lib|spec/support)/.*\.rb$})  { ["app", "lib", "spec/support"] }
+    guard 'ctags-bundler', :emacs => true, :src_path => ["app", "lib", "spec/support"] do
+      watch(/^(app|lib|spec\/support)\/.*\.rb$/)
       watch('Gemfile.lock')
     end
 
-Thanks to [Jorge Dias](https://github.com/diasjorge) for this patch.
+Thanks to [Jorge Dias](https://github.com/diasjorge) and [Antono Vasiljev](https://github.com/antono) for emacs support.
