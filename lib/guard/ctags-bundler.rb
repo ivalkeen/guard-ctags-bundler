@@ -15,7 +15,7 @@ module Guard
       run_on_change(['Gemfile.lock', '.'])
     end
 
-    def run_on_change(paths)
+    def run_on_changes(paths)
       if paths.include?('Gemfile.lock')
         UI.info "regenerating bundler tags..."
         generate_bundler_tags
