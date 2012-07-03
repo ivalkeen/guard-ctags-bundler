@@ -8,10 +8,15 @@ class Guard::Ctags::Bundler::CtagsGenerator
   end
 
   def generate_bundler_tags
-    definition = Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
-    runtime = Bundler::Runtime.new(Dir.pwd, definition)
-    paths = runtime.requested_specs.map(&:full_gem_path)
-    generate_tags(paths, "gems.tags")
+    # this code doesn't work with recent bundler versions
+    #definition = Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
+    #runtime = Bundler::Runtime.new(Dir.pwd, definition)
+    #paths = runtime.requested_specs.map(&:full_gem_path)
+    #generate_tags(paths, "gems.tags")
+
+    # this is ugly, but should work with every bundler version
+    paths = `ruby -e "require('bundler'); puts(Bundler.load.specs.map(&:full_gem_path).join(' '))"`
+    generate_tags(paths.strip, "gems.tags")
   end
 
   private
