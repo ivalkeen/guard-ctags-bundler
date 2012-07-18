@@ -1,4 +1,3 @@
-require "guard/ctags-bundler/ctags_generator"
 require 'guard'
 require 'guard/guard'
 require 'bundler'
@@ -6,9 +5,11 @@ require 'bundler/runtime'
 
 module Guard
   class CtagsBundler < Guard
+    autoload 'CtagsGenerator', 'guard/ctags-bundler/ctags_generator'
+
     def initialize(watchers = [], options = {})
       super(watchers, options)
-      @ctags_generator = ::Guard::Ctags::Bundler::CtagsGenerator.new(options)
+      @ctags_generator = ::Guard::CtagsBundler::CtagsGenerator.new(options)
     end
 
     def start

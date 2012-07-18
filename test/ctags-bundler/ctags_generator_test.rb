@@ -35,6 +35,6 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
   private
 
   def generator(opts = {})
-    Guard::Ctags::Bundler::CtagsGenerator.new(opts)
+    ::Guard::CtagsBundler::CtagsGenerator.new(opts)
   end
 end
