@@ -1,4 +1,3 @@
-require "guard/ctags-bundler/version"
 require "guard/ctags-bundler/ctags_generator"
 require 'guard'
 require 'guard/guard'
