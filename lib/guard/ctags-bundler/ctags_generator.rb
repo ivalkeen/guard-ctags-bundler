@@ -10,8 +10,8 @@ module Guard
       end
 
       def generate_bundler_tags
-        definition = Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
-        runtime = Bundler::Runtime.new(Dir.pwd, definition)
+        definition = ::Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
+        runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
         paths = runtime.requested_specs.map(&:full_gem_path)
         generate_tags(paths, "gems.tags")
       end
