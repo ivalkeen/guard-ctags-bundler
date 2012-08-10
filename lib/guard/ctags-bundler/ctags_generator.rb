@@ -10,6 +10,7 @@ module Guard
       end
 
       def generate_bundler_tags
+        ::Bundler.configure # in case we're not running guard from inside Bundler
         definition = ::Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
         runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
         paths = runtime.requested_specs.map(&:full_gem_path)
