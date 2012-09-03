@@ -1,3 +1,4 @@
+require 'rbconfig'
 require 'bundler'
 require 'bundler/runtime'
 
@@ -20,9 +21,14 @@ module Guard
         generate_tags(paths, custom_path_for("gems.tags") )
       end
 
+      def generate_stdlib_tags
+        generate_tags(RbConfig::CONFIG['rubylibdir'], "stdlib.tags")
+      end
+
       private
 
       def generate_tags(path, tag_file)
+        puts path
         if path.instance_of?(Array)
           path = path.join(' ').strip
         end
@@ -30,7 +36,13 @@ module Guard
         cmd = "find #{path} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
         cmd << " -e" if @opts[:emacs]
         system(cmd)
-        system("cat #{custom_path_for("tags")} #{custom_path_for("gems.tags")} > TAGS") if @opts[:emacs]
+        if @opts[:emacs]
+          if @opts[:stdlib]
+            system("cat #{custom_path_for("tags")} #{custom_path_for("gems.tags")} #{custom_path_for("stdlib.tags")} > TAGS")
+          else
+            system("cat #{custom_path_for("tags")} #{custom_path_for("gems.tags")} > TAGS")
+          end
+        end
       end
 
       def custom_path_for(file)
