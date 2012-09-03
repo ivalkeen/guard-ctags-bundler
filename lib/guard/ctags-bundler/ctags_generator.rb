@@ -22,17 +22,16 @@ module Guard
       end
 
       def generate_stdlib_tags
-        generate_tags(RbConfig::CONFIG['rubylibdir'], "stdlib.tags")
+        generate_tags(RbConfig::CONFIG['rubylibdir'], custom_path_for("stdlib.tags"))
       end
 
       private
 
       def generate_tags(path, tag_file)
-        puts path
         if path.instance_of?(Array)
           path = path.join(' ').strip
         end
-        system("mkdir  ./#{@opts[:custom_path]}") if @opts[:custom_path]
+        system("mkdir -p ./#{@opts[:custom_path]}") if @opts[:custom_path]
         cmd = "find #{path} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
         cmd << " -e" if @opts[:emacs]
         system(cmd)
