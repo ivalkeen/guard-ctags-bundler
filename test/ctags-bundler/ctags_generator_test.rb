@@ -4,8 +4,11 @@ require 'guard/ctags-bundler/ctags_generator'
 
 class CtagsGeneratorTest < MiniTest::Unit::TestCase
   def setup
-    clean_tags
     Dir.chdir(test_project_path)
+  end
+
+  def teardown
+    clean_tags
   end
 
   def test_generate_project_tags
