@@ -4,8 +4,13 @@ require 'guard/ctags-bundler/ctags_generator'
 
 class CtagsGeneratorTest < MiniTest::Unit::TestCase
   def setup
-    clean_tags
+    @oldpath = Dir.pwd
     Dir.chdir(test_project_path)
+  end
+
+  def teardown
+    Dir.chdir(@oldpath)
+    clean_tags
   end
 
   def test_generate_project_tags
@@ -14,19 +19,31 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_project_tags_for_src_path_only
-    generator(src_path: ["app", "lib"]).generate_project_tags
+    generator(:src_path => ["app", "lib"]).generate_project_tags
     result = File.read(test_tags_file)
     assert_match("method_of_class_1", result)
     assert_match("method_of_class_2", result)
     refute_match("method_of_class_3", result)
-    refute_match("Rake", result)
+    refute_match(/Guard\b/, result)
   end
 
   def test_generate_bundler_tags
     generator.generate_bundler_tags
     assert File.exists?(test_gems_tags_file)
     result = File.read(test_gems_tags_file)
-    assert_match("Rake", result)
+    assert_match(/Guard\b/, result)
+    refute_match("method_of_class_1", result)
+    refute_match("method_of_class_2", result)
+    refute_match("method_of_class_3", result)
+  end
+
+  def test_generate_stdlib_tags
+    generator.generate_stdlib_tags
+    assert File.exists?(test_stdlib_tags_file)
+    result = File.read(test_stdlib_tags_file)
+    assert_match("DateTime", result)
+    assert_match("YAML", result)
+    refute_match(/Guard\b/, result)
     refute_match("method_of_class_1", result)
     refute_match("method_of_class_2", result)
     refute_match("method_of_class_3", result)

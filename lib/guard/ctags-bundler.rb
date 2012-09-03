@@ -1,7 +1,6 @@
+require 'rubygems'
 require 'guard'
 require 'guard/guard'
-require 'bundler'
-require 'bundler/runtime'
 
 module Guard
   class CtagsBundler < Guard
@@ -16,6 +15,7 @@ module Guard
       UI.info 'Guard::CtagsBundler is running!'
       @ctags_generator.generate_bundler_tags
       @ctags_generator.generate_project_tags
+      @ctags_generator.generate_stdlib_tags if options[:stdlib]
     end
 
     def run_on_changes(paths)

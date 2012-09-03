@@ -36,6 +36,7 @@ Please, read [Guard usage doc](https://github.com/guard/guard#readme)
 ``` ruby
 :src_path => ".", # source path to be scanned for tags (default .)
 :emacs => false, # run ctags in emacs mode and merge tags and gems.tags into TAGS file
+:stdlib => true, # run ctags for core and stdlib, generating stdlib.tags (default false)
 ```
 
 For a typical Rails application, `Guardfile` can look like this (default):

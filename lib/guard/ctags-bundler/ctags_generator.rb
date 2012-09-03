@@ -1,3 +1,7 @@
+require 'rbconfig'
+require 'bundler'
+require 'bundler/runtime'
+
 module Guard
   class CtagsBundler
     class CtagsGenerator
@@ -17,6 +21,10 @@ module Guard
         generate_tags(paths, "gems.tags")
       end
 
+      def generate_stdlib_tags
+        generate_tags(RbConfig::CONFIG['libdir'], "stdlib.tags")
+      end
+
       private
 
       def generate_tags(path, tag_file)
@@ -27,7 +35,13 @@ module Guard
         cmd = "find #{path} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
         cmd << " -e" if @opts[:emacs]
         system(cmd)
-        system("cat tags gems.tags > TAGS") if @opts[:emacs]
+        if @opts[:emacs]
+          if @opts[:stdlib]
+            system("cat tags gems.tags stdlib.tags > TAGS")
+          else
+            system("cat tags gems.tags > TAGS")
+          end
+        end
       end
     end
   end
