@@ -1,3 +1,6 @@
+require 'bundler'
+require 'bundler/runtime'
+
 module Guard
   class CtagsBundler
     class CtagsGenerator

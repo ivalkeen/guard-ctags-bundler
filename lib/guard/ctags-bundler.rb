@@ -1,7 +1,6 @@
+require 'rubygems'
 require 'guard'
 require 'guard/guard'
-require 'bundler'
-require 'bundler/runtime'
 
 module Guard
   class CtagsBundler < Guard

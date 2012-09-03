@@ -4,8 +4,13 @@ require 'guard/ctags-bundler/ctags_generator'
 
 class CtagsGeneratorTest < MiniTest::Unit::TestCase
   def setup
-    clean_tags
+    @oldpath = Dir.pwd
     Dir.chdir(test_project_path)
+  end
+
+  def teardown
+    Dir.chdir(@oldpath)
+    clean_tags
   end
 
   def test_generate_project_tags
@@ -14,7 +19,7 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_project_tags_for_src_path_only
-    generator(src_path: ["app", "lib"]).generate_project_tags
+    generator(:src_path => ["app", "lib"]).generate_project_tags
     result = File.read(test_tags_file)
     assert_match("method_of_class_1", result)
     assert_match("method_of_class_2", result)

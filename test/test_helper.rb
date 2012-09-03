@@ -1,8 +1,9 @@
+require 'rubygems'
 require 'minitest/autorun'
 require 'purdytest'
 
 def test_project_path
-  File.expand_path("test_project", File.dirname(__FILE__))
+  @cached ||= File.expand_path("test_project", File.dirname(__FILE__))
 end
 
 def test_tags_file
