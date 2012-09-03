@@ -35,7 +35,13 @@ module Guard
         cmd = "find #{path} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
         cmd << " -e" if @opts[:emacs]
         system(cmd)
-        system("cat tags gems.tags > TAGS") if @opts[:emacs]
+        if @opts[:emacs]
+          if @opts[:stdlib]
+            system("cat tags gems.tags stdlib.tags > TAGS")
+          else
+            system("cat tags gems.tags > TAGS")
+          end
+        end
       end
     end
   end
