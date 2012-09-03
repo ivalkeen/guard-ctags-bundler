@@ -1,5 +1,5 @@
-###### Guard-CTags-Bundler
-=
+# Guard-CTags-Bundler
+
 [![Build Status](https://secure.travis-ci.org/ivalkeen/guard-ctags-bundler.png)](http://travis-ci.org/ivalkeen/guard-ctags-bundler)
 
 Guard-CTags-Bundler generates [ctags](http://ctags.sourceforge.net) for your project and for gems in your bundle. For project tags file `tags` is generated, for gems tags file `gems.tags` is generated.
