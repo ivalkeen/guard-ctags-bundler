@@ -37,6 +37,17 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     refute_match("method_of_class_3", result)
   end
 
+  def test_generate_stdlib_tags
+    generator.generate_stdlib_tags
+    assert File.exists?(test_stdlib_tags_file)
+    result = File.read(test_stdlib_tags_file)
+    assert_match("DateTime", result)
+    assert_match("YAML", result)
+    refute_match("method_of_class_1", result)
+    refute_match("method_of_class_2", result)
+    refute_match("method_of_class_3", result)
+  end
+
   private
 
   def generator(opts = {})

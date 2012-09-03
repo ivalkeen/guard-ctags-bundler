@@ -1,3 +1,4 @@
+require 'rbconfig'
 require 'bundler'
 require 'bundler/runtime'
 
@@ -18,6 +19,10 @@ module Guard
         runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
         paths = runtime.requested_specs.map(&:full_gem_path)
         generate_tags(paths, "gems.tags")
+      end
+
+      def generate_stdlib_tags
+        generate_tags(RbConfig::CONFIG['libdir'], "stdlib.tags")
       end
 
       private

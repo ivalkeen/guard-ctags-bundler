@@ -14,8 +14,12 @@ def test_gems_tags_file
   File.join(test_project_path, "gems.tags")
 end
 
+def test_stdlib_tags_file
+  File.join(test_project_path, "stdlib.tags")
+end
+
 def clean_tags
-  [test_tags_file, test_gems_tags_file].each do |file|
+  [test_tags_file, test_gems_tags_file, test_stdlib_tags_file].each do |file|
     File.delete(file) if File.exists?(file)
   end
 end
