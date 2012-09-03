@@ -50,7 +50,7 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_project_tags_for_custom_path
-    generator(custom_path: "custom").generate_project_tags
+    generator(:custom_path => "custom").generate_project_tags
     result = File.read(custom_path_file)
     assert_match("method_of_class_1", result)
     assert_match("method_of_class_2", result)
