@@ -22,7 +22,7 @@ module Guard
       end
 
       def generate_stdlib_tags
-        generate_tags(RbConfig::CONFIG['rubylibdir'], custom_path_for("stdlib.tags"))
+        generate_tags(stdlib_path, custom_path_for("stdlib.tags"))
       end
 
       private
@@ -52,6 +52,14 @@ module Guard
         end
       end
 
+      def stdlib_path
+        # hack for rubinius, as it breaks MRI and JRuby directory structure
+        if defined?(RUBY_ENGINE) && RUBY_ENGINE == "rbx"
+          RbConfig::CONFIG['libdir']
+        else
+          RbConfig::CONFIG['rubylibdir']
+        end
+      end
     end
   end
 end
