@@ -6,3 +6,6 @@ pkg/*
 /vendor/rbx
 /test/test_project/tags
 /test/test_project/gems.tags
+/.vagrant
+/Vagrantfile
+/.rbx
