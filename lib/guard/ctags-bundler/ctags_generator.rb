@@ -1,6 +1,6 @@
 require 'rbconfig'
-require 'bundler'
-require 'bundler/runtime'
+#require 'bundler'
+#require 'bundler/runtime'
 
 module Guard
   class CtagsBundler
@@ -14,11 +14,25 @@ module Guard
       end
 
       def generate_bundler_tags
-        ::Bundler.configure # in case we're not running guard from inside Bundler
-        definition = ::Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
-        runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
-        paths = runtime.requested_specs.map(&:full_gem_path)
-        generate_tags(paths, custom_path_for("gems.tags") )
+        # FIXME: Using bundler API cases issues when guard is executed in the non-bundler environment
+        #::Bundler.configure # in case we're not running guard from inside Bundler
+        #definition = ::Bundler::Definition.build("Gemfile", "Gemfile.lock", nil)
+        #runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
+        #paths = runtime.requested_specs.map(&:full_gem_path)
+
+        # this is ugly, but should work with every bundler version
+        cmd = <<-CMD
+          require('bundler')
+          require('bundler/runtime')
+          ::Bundler.configure
+          definition = ::Bundler::Definition.build('Gemfile', 'Gemfile.lock', nil)
+          runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
+          paths = runtime.requested_specs.map(&:full_gem_path)
+          puts(paths.join(' '))
+        CMD
+        paths = `ruby -e "#{cmd}"`
+
+        generate_tags(paths.strip, custom_path_for("gems.tags"))
       end
 
       def generate_stdlib_tags
