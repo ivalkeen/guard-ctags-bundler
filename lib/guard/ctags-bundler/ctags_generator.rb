@@ -46,7 +46,7 @@ module Guard
           path = path.join(' ').strip
         end
         system("mkdir -p ./#{@opts[:custom_path]}") if @opts[:custom_path]
-        cmd = "find #{path} -type f -name \\*.rb | ctags -f #{tag_file} -L -"
+        cmd = "ctags -f #{tag_file} -R --languages=ruby #{path}"
         cmd << " -e" if @opts[:emacs]
         system(cmd)
         if @opts[:emacs]
