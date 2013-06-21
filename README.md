@@ -38,6 +38,7 @@ Please, read [Guard usage doc](https://github.com/guard/guard#readme)
 :src_path => ".", # source path to be scanned for tags (default .)
 :emacs => false, # run ctags in emacs mode and merge tags and gems.tags into TAGS file
 :stdlib => true, # run ctags for core and stdlib, generating stdlib.tags (default false)
+:binary => 'ctags-exuberant' # name of the ctags binary (default ctags)
 ```
 
 For a typical Rails application, `Guardfile` can look like this (default):
@@ -49,7 +50,7 @@ For a typical Rails application, `Guardfile` can look like this (default):
 
 ## CTags
 
-[Ctags](http://ctags.sourceforge.net) generates an index (or tag) file of language objects found in source files that allows these items to be quickly and easily located by a text editor or other utility. A tag signifies a language object for which an index entry is available (or, alternatively, the index entry created for that object). 
+[Ctags](http://ctags.sourceforge.net) generates an index (or tag) file of language objects found in source files that allows these items to be quickly and easily located by a text editor or other utility. A tag signifies a language object for which an index entry is available (or, alternatively, the index entry created for that object).
 
 In ubuntu you can install ctags by running
 
