@@ -10,7 +10,7 @@ module Guard
       end
 
       def generate_project_tags
-        generate_tags(@opts[:src_path] || ".", custom_path_for("tags"))
+        generate_tags(@opts[:src_path] || ".", custom_path_for("project.tags"))
       end
 
       def generate_bundler_tags
@@ -51,9 +51,9 @@ module Guard
         system(cmd)
         if @opts[:emacs]
           if @opts[:stdlib]
-            system("cat #{custom_path_for("tags")} #{custom_path_for("gems.tags")} #{custom_path_for("stdlib.tags")} > TAGS")
+            system("cat #{custom_path_for("project.tags")} #{custom_path_for("gems.tags")} #{custom_path_for("stdlib.tags")} > TAGS")
           else
-            system("cat #{custom_path_for("tags")} #{custom_path_for("gems.tags")} > TAGS")
+            system("cat #{custom_path_for("project.tags")} #{custom_path_for("gems.tags")} > TAGS")
           end
         end
       end
