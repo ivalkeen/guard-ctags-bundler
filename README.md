@@ -39,6 +39,7 @@ Please, read [Guard usage doc](https://github.com/guard/guard#readme)
 :emacs => false, # run ctags in emacs mode and merge tags and gems.tags into TAGS file
 :stdlib => true, # run ctags for core and stdlib, generating stdlib.tags (default false)
 :binary => 'ctags-exuberant' # name of the ctags binary (default ctags)
+:arguments => '-R --languages=ruby --fields=+l' # change the arguments passed to ctags (default '-R --languages=ruby')
 ```
 
 For a typical Rails application, `Guardfile` can look like this (default):
