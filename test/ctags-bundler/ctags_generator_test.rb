@@ -24,14 +24,14 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     assert_match("method_of_class_1", result)
     assert_match("method_of_class_2", result)
     refute_match("method_of_class_3", result)
-    refute_match(/\bGuard\b/, result)
+    refute_match(/\bGuardfile\b/, result)
   end
 
   def test_generate_bundler_tags
     generator.generate_bundler_tags
     assert File.exists?(test_gems_tags_file)
     result = File.read(test_gems_tags_file)
-    assert_match(/\bGuard\b/, result)
+    assert_match(/\bGuardfile\b/, result)
     refute_match("method_of_class_1", result)
     refute_match("method_of_class_2", result)
     refute_match("method_of_class_3", result)
@@ -43,7 +43,7 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     result = File.read(test_stdlib_tags_file)
     assert_match("DateTime", result)
     assert_match("YAML", result)
-    refute_match(/\bGuard\b/, result)
+    refute_match(/\bGuardfile\b/, result)
     refute_match("method_of_class_1", result)
     refute_match("method_of_class_2", result)
     refute_match("method_of_class_3", result)
