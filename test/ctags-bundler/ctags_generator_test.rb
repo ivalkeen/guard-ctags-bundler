@@ -58,6 +58,16 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     refute_match("Rake", result)
   end
 
+  def test_generate_tags_with_arguments
+    generator(:src_path => ["app", "lib"], :arguments => '-R --languages=javascript').generate_project_tags
+    result = File.read(test_tags_file)
+    assert_match("jsFunction", result)
+    refute_match("method_of_class_1", result)
+    refute_match("method_of_class_2", result)
+    refute_match("method_of_class_3", result)
+    refute_match(/\bGuardfile\b/, result)
+  end
+
   private
 
   def generator(opts = {})
