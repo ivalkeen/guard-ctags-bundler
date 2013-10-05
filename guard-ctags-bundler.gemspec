@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  s.add_dependency 'guard', '>= 1.1'
+  s.add_dependency 'guard', '~> 2.0'
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"

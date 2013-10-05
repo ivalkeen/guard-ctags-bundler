@@ -3,11 +3,11 @@ require 'guard'
 require 'guard/guard'
 
 module Guard
-  class CtagsBundler < Guard
+  class CtagsBundler < Plugin
     autoload 'CtagsGenerator', 'guard/ctags-bundler/ctags_generator'
 
-    def initialize(watchers = [], options = {})
-      super(watchers, options)
+    def initialize(options = {})
+      super
       @ctags_generator = ::Guard::CtagsBundler::CtagsGenerator.new(options)
     end
 
