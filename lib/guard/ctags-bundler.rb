@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'guard'
 require 'guard/guard'
+require 'guard/plugin'
 
 module Guard
   class CtagsBundler < Plugin
@@ -30,6 +31,10 @@ module Guard
         UI.info "regenerating project tags..."
         @ctags_generator.generate_project_tags
       end
+    end
+
+    def self.add_callback(*args)
+      ::Guard::Plugin::Hooker.add_callback(*args)
     end
   end
 end
