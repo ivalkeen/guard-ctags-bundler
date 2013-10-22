@@ -74,6 +74,12 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     refute_match("javaMethod", result)
   end
 
+  def test_ignore_emacs_temporary_files
+    generator(:src_path => ["app", "lib"]).generate_project_tags
+    result = File.read(test_tags_file)
+    refute_match(".#class2", result)
+  end
+
   private
 
   def generator(opts = {})
