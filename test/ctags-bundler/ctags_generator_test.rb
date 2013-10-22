@@ -77,6 +77,7 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
   private
 
   def generator(opts = {})
-    ::Guard::CtagsBundler::CtagsGenerator.new(opts)
+    binary = ENV['CTAGS_BINARY'] || 'ctags'
+    ::Guard::CtagsBundler::CtagsGenerator.new({ binary: binary}.merge(opts))
   end
 end
