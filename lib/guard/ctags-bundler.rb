@@ -36,5 +36,13 @@ module Guard
     def self.add_callback(*args)
       ::Guard::Plugin::Hooker.add_callback(*args)
     end
+
+    def self.template(plugin_location)
+      File.read(template_path(plugin_location))
+    end
+
+    def self.template_path(plugin_location)
+      File.join(plugin_location, 'lib', 'guard', 'ctags-bundler', 'templates', 'Guardfile')
+    end
   end
 end
