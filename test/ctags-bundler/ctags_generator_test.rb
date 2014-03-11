@@ -1,6 +1,6 @@
 require 'test_helper'
 
-require 'guard/ctags-bundler/ctags_generator'
+require 'guard/ctags-bundler'
 
 class CtagsGeneratorTest < MiniTest::Unit::TestCase
   def setup

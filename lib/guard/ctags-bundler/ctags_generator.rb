@@ -3,7 +3,7 @@ require 'rbconfig'
 #require 'bundler/runtime'
 
 module Guard
-  class CtagsBundler
+  class CtagsBundler < Plugin
     class CtagsGenerator
       def initialize(opts = {})
         @opts = opts
