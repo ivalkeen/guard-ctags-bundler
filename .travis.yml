@@ -4,5 +4,6 @@ before_install:
 rvm:
   - 2.1.1
   - jruby
+  - rbx
 notifications:
   email: itkalin@gmail.com

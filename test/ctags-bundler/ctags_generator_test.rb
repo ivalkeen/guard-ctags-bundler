@@ -38,15 +38,18 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
   end
 
   def test_generate_stdlib_tags
-    generator.generate_stdlib_tags
-    assert File.exists?(test_stdlib_tags_file)
-    result = File.read(test_stdlib_tags_file)
-    assert_match("DateTime", result)
-    assert_match("YAML", result)
-    refute_match(/\bGuardfile\b/, result)
-    refute_match("method_of_class_1", result)
-    refute_match("method_of_class_2", result)
-    refute_match("method_of_class_3", result)
+    # rubinius standard library is packaged in gems
+    if defined?(RUBY_ENGINE) && RUBY_ENGINE != "rbx"
+      generator.generate_stdlib_tags
+      assert File.exists?(test_stdlib_tags_file)
+      result = File.read(test_stdlib_tags_file)
+      assert_match("DateTime", result)
+      assert_match("YAML", result)
+      refute_match(/\bGuardfile\b/, result)
+      refute_match("method_of_class_1", result)
+      refute_match("method_of_class_2", result)
+      refute_match("method_of_class_3", result)
+    end
   end
 
   def test_generate_project_tags_for_custom_path
