@@ -10,7 +10,7 @@ module Guard
       end
 
       def generate_project_tags
-        generate_tags(@opts[:src_path] || ".", custom_path_for("tags"))
+        generate_tags(@opts[:src_path] || ".", custom_path_for(@opts.fetch(:project_file, "tags")))
       end
 
       def generate_bundler_tags
@@ -32,11 +32,11 @@ module Guard
         CMD
         paths = `ruby -e "#{cmd}"`
 
-        generate_tags(paths.strip, custom_path_for("gems.tags"))
+        generate_tags(paths.strip, custom_path_for(@opts.fetch(:bundler_tags_file, "gems.tags")))
       end
 
       def generate_stdlib_tags
-        generate_tags(stdlib_path, custom_path_for("stdlib.tags"))
+        generate_tags(stdlib_path, custom_path_for(@opts.fetch(:stdlib_file, "stdlib.tags")))
       end
 
       private

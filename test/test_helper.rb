@@ -22,8 +22,12 @@ def test_stdlib_tags_file
   File.join(test_project_path, "stdlib.tags")
 end
 
+def test_override_tags_file
+  File.join(test_project_path, "override.tags")
+end
+
 def clean_tags
-  [test_tags_file, test_gems_tags_file, test_stdlib_tags_file, custom_path_file].each do |file|
+  [test_tags_file, test_gems_tags_file, test_stdlib_tags_file, custom_path_file, test_override_tags_file].each do |file|
     File.delete(file) if File.exists?(file)
   end
 
