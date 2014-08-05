@@ -37,6 +37,16 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     refute_match("method_of_class_3", result)
   end
 
+  def test_generate_bundler_tags_for_gems_file
+    generator(:bundler_tags_file => 'override.tags').generate_bundler_tags
+    assert File.exists?(test_override_tags_file)
+    result = File.read(test_override_tags_file)
+    assert_match(/\bGuardfile\b/, result)
+    refute_match("method_of_class_1", result)
+    refute_match("method_of_class_2", result)
+    refute_match("method_of_class_3", result)
+  end
+
   def test_generate_stdlib_tags
     # rubinius standard library is packaged in gems
     if defined?(RUBY_ENGINE) && RUBY_ENGINE != "rbx"
@@ -52,9 +62,33 @@ class CtagsGeneratorTest < MiniTest::Unit::TestCase
     end
   end
 
+  def test_generate_stdlib_tags_for_stdlib_file
+    # rubinius standard library is packaged in gems
+    if defined?(RUBY_ENGINE) && RUBY_ENGINE != "rbx"
+      generator(:stdlib_file => "override.tags").generate_stdlib_tags
+      assert File.exists?(test_override_tags_file)
+      result = File.read(test_override_tags_file)
+      assert_match("DateTime", result)
+      assert_match("YAML", result)
+      refute_match(/\bGuardfile\b/, result)
+      refute_match("method_of_class_1", result)
+      refute_match("method_of_class_2", result)
+      refute_match("method_of_class_3", result)
+    end
+  end
+
   def test_generate_project_tags_for_custom_path
     generator(:custom_path => "custom").generate_project_tags
     result = File.read(custom_path_file)
+    assert_match("method_of_class_1", result)
+    assert_match("method_of_class_2", result)
+    assert_match("method_of_class_3", result)
+    refute_match("Rake", result)
+  end
+
+  def test_generate_project_tags_for_project_file
+    generator(:project_file => "override.tags").generate_project_tags
+    result = File.read(test_override_tags_file)
     assert_match("method_of_class_1", result)
     assert_match("method_of_class_2", result)
     assert_match("method_of_class_3", result)
