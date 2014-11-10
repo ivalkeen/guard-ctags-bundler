@@ -1,8 +1,10 @@
 before_install:
   - gem install bundler
   - sudo apt-get install exuberant-ctags
+install:
+  - bundle install --retry=3
 rvm:
-  - 2.1.2
+  - 2.1.4
   - jruby
   - rbx-2
 notifications:
