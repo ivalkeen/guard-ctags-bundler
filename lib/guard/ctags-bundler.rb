@@ -1,6 +1,4 @@
-require 'rubygems'
-require 'guard'
-require 'guard/plugin'
+require 'guard/compat/plugin'
 
 module Guard
   class CtagsBundler < Plugin

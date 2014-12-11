@@ -1,5 +1,7 @@
 require 'test_helper'
 
+require 'guard/compat/test/helper'
+
 require 'guard/ctags-bundler'
 
 class CtagsBundlerTest < MiniTest::Unit::TestCase
@@ -17,21 +19,5 @@ class CtagsBundlerTest < MiniTest::Unit::TestCase
   def test_template
     template = File.read(@template_path)
     assert_equal template, @plugin.class.template(@gem_root_path)
-  end
-
-  def test_non_namespaced_classname
-    assert_equal 'CtagsBundler', @plugin.class.non_namespaced_classname
-  end
-
-  def test_non_namespaced_name
-    assert_equal 'ctagsbundler', @plugin.class.non_namespaced_name
-  end
-
-  def test_name
-    assert_equal 'ctagsbundler', @plugin.name
-  end
-
-  def test_title
-    assert_equal 'CtagsBundler', @plugin.title
   end
 end
