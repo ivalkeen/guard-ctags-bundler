@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_dependency 'guard', '~> 2.0'
+  s.add_dependency 'guard-compat', '~> 1.1'
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
