@@ -30,10 +30,6 @@ module Guard
       end
     end
 
-    def self.add_callback(*args)
-      ::Guard::Plugin::Hooker.add_callback(*args)
-    end
-
     def self.template(plugin_location)
       File.read(template_path(plugin_location))
     end
