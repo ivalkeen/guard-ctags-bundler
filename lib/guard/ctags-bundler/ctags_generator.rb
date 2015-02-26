@@ -20,12 +20,14 @@ module Guard
         #runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
         #paths = runtime.requested_specs.map(&:full_gem_path)
 
+        gemfile = @opts.fetch(:gemfile, 'Gemfile')
+        lockfile = "#{gemfile}.lock"
         # this is ugly, but should work with every bundler version
         cmd = <<-CMD
           require('bundler')
           require('bundler/runtime')
           ::Bundler.configure
-          definition = ::Bundler::Definition.build('Gemfile', 'Gemfile.lock', nil)
+          definition = ::Bundler::Definition.build('#{gemfile}', '#{lockfile}', nil)
           runtime = ::Bundler::Runtime.new(Dir.pwd, definition)
           paths = runtime.requested_specs.map(&:full_gem_path)
           puts(paths.join(' '))
