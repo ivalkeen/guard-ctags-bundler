@@ -77,3 +77,16 @@ Ctags can be used with emacs too. Add `:emacs => true` option to your Guardfile 
     end
 
 Thanks to [Jorge Dias](https://github.com/diasjorge) and [Antono Vasiljev](https://github.com/antono) for emacs support.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+## Self-Promotion
+
+If you like this project, please follow the repository on [GitHub](https://github.com/ivalkeen/guard-ctags-bundler). You can also consider visiting my [blog](http://www.tkalin.com) and following me on [Twitter](https://twitter.com/ivalkeen) and [Github](https://github.com/ivalkeen).
+
