@@ -88,5 +88,5 @@ Thanks to [Jorge Dias](https://github.com/diasjorge) and [Antono Vasiljev](https
 
 ## Self-Promotion
 
-If you like this project, please follow the repository on [GitHub](https://github.com/ivalkeen/guard-ctags-bundler). You can also consider visiting my [blog](http://www.tkalin.com) and following me on [Twitter](https://twitter.com/ivalkeen) and [Github](https://github.com/ivalkeen).
+If you like this project, please follow the repository on [GitHub](https://github.com/ivalkeen/guard-ctags-bundler). Also, you might consider visiting my [blog](http://www.tkalin.com) and following me on [Twitter](https://twitter.com/ivalkeen) and [Github](https://github.com/ivalkeen).
 
