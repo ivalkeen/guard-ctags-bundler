@@ -12,6 +12,15 @@ class CtagsBundlerTest < MiniTest::Unit::TestCase
     @template_path = File.expand_path(template_path, __FILE__)
   end
 
+  def test_silence
+    @silent_plugin = Guard::CtagsBundler.new({silent: true})
+    assert @silent_plugin.instance_variable_get(:@silent), "Expect plugin to be silent"
+  end
+
+  def test_chatty
+    assert !@plugin.instance_variable_get(:@silent), "Expect plugin to be chatty"
+  end
+
   def test_template_path
     assert_equal @template_path, @plugin.class.template_path(@gem_root_path)
   end
