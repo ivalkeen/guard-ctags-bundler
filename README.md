@@ -44,6 +44,7 @@ Please, read [Guard usage doc](https://github.com/guard/guard#readme)
 :bundler_tags_file => "gems.tags" # name of tags file for bundler gems references (default gems.tags)
 :project_file => "tags" # name of tags file for project references (default tags)
 :gemfile => "Gemfil" # name of tags file for project references (default 'Gemfile')
+:silent => false # Suppress regeneration notices
 ```
 
 For a typical Rails application, `Guardfile` can look like this (default):
