@@ -39,7 +39,7 @@ Please, read [Guard usage doc](https://github.com/guard/guard#readme)
 :emacs => false, # run ctags in emacs mode and merge tags and gems.tags into TAGS file
 :stdlib => true, # run ctags for core and stdlib, generating stdlib.tags (default false)
 :binary => 'ctags-exuberant' # name of the ctags binary (default ctags)
-:arguments => '-R --languages=ruby --fields=+l' # change the arguments passed to ctags (default '-R --languages=ruby')
+:arguments => '-R --languages=ruby --fields=+l' # change the arguments passed to ctags (default '-R --languages=ruby --exclude=".#*"')
 :stdlib_file => "stdlib.tags" # name of tags file for stdlib references (default stdlib.tags)
 :bundler_tags_file => "gems.tags" # name of tags file for bundler gems references (default gems.tags)
 :project_file => "tags" # name of tags file for project references (default tags)
